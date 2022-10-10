@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FILMS</title>
+    <link rel="stylesheet" href="{% static 'css/css.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+    <nav class="navbar navbar-expand-lg text-bg-success">
+        <a class="container-fluid">
+            <img src="{% static 'images/астронафт.jpg' %}" alt="Bootstrap" width="45" height="45">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/films/">Главная страница</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register/">Регистрация</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link " href="/logout/">Выйти({{ user }})</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link " href="/login/">Авторизация</a>
+                    </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item ">
+                        <a class="nav-link " href="/add_film/">Добавить Фильм</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link " href="/login/">Авторизация</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search" action="/search/" method="get">
+                <input class="form-control me-2" type="search" name="search_word" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        </div>
+    </nav>
+    <style>
+        .content {
+            width: 70%;
+            border-radius: 70%;
+            padding: 4em;
+            margin-bottom: 4em;
+        }
+    </style>
+</head>
+<body>
+{% block content %}
+{% endblock %}
+</body>
+</html>

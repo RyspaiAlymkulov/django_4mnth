@@ -1,0 +1,40 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ film_detail.title }}</title>
+    </head>
+    <body>
+    <a href="/films/">
+        <button>Назад</button>
+    </a>
+    <h4> Название фильма: {{ film_detail.title }}</h4>
+    <a href="{{ film_detail.link }}"> Ссылка: {{ film_detail.link }}</a>
+    <p> Режиссер: {{ film_detail.producer }}</p>
+    <b> Оценка: {{ film_detail.rating }}</b>
+    <i> Длительность: {{ film_detail.duration }}</i>
+    <hr/>
+    <h2>Отзывы к фильму</h2>
+    {% if user.is_authenticated %}
+       <div class="form-content" style="margin-top: 30px; margin-left: 500px; margin-right: 500px">
+              <form action="/films/{{ film_detail.id }}/" method="post">
+                {% csrf_token %}
+                  <p>
+                      <input type="text" class="form-control"
+                      placeholder="Отзыв" name="films"/>
+                  </p>
+                  <p>
+                      <input type="text" class="form-control"
+                      placeholder="Текст" name="films"/>
+                  </p>
+                <input type="submit" class="btn btn-success">
+            </form>
+        </div>
+    {% endif %}
+    {% for i in reviews %}
+        <p> Фильм: {{ i.film }}</p>
+        <p> Отзыв: {{ i.text }}</p>
+        <hr>
+    {% endfor %}
+    </body>
+    </html>
